@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>AJAX Progress - Test</title>
+    <script type="text/javascript" src="../lib/jquery-1.5.2.js"></script>
+    <script type="text/javascript" src="../jquery.ajaxprogress.js"></script>
+
+    <script type="text/javascript">
+
+        function runTest() {
+
+            var $prog = $("#prog");
+
+            function showProgress(jqXHR, evt) {
+                console.log("Global event");
+                var msg = "Length not computable";
+                if (evt.lengthComputable) {
+                    msg = "Got " + evt.loaded + " / " + evt.total;
+                }
+                $("<p>" + msg + "</p>").appendTo($prog);
+            }
+
+
+            $("body").ajaxProgress(showProgress);
+
+            // In Firefox, this file is too small 
+            var ajax = $.ajax({url:"/lib/jquery-1.5.2.js", cache: false,
+                        progress: function(jqHXR, e) {
+                            console.log("Local event", e);
+                        }
+                    }
+            );
+
+            ajax.done(function() {
+                console.log("Done!");
+            });
+
+            ajax.fail(function() {
+                console.warn(arguments, "Failed!");
+            })
+        }
+
+        $(runTest);
+
+    </script>
+
+</head>
+<body>
+<h1>AJAX Progress - Test</h1>
+
+<div id="prog"></div>
+</body>
+</html>
