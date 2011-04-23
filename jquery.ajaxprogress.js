@@ -5,7 +5,7 @@
  * http://www.kpozin.net/ajaxprogress
  *
  * (c) 2011, Konstantin Pozin
- * Licensed under MIT license (https://github.com/kpozin/jquery-ajaxprogress/raw/master/MIT-LICENSE.txt)
+ * Licensed under MIT license.
  */
 (function($) {
 
