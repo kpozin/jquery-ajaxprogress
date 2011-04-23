@@ -3,16 +3,15 @@
  * http://www.kpozin.net/ajaxprogress
  *
  * (c) 2011, Konstantin Pozin
- * Licensed under MIT license.
+ * Licensed under MIT license (https://github.com/kpozin/jquery-ajaxprogress/raw/master/MIT-LICENSE.txt)
  */
-
 (function($) {
 
     // Test whether onprogress is supported
-    $.support.ajaxProgress = (XMLHttpRequest && "onprogress" in (new XMLHttpRequest()));
+    var support = $.support.ajaxProgress = ("onprogress" in (new $.ajaxSettings.xhr()));
 
     // If it's not supported, we can't do anything
-    if (!$.support.ajaxProgress) {
+    if (!support) {
         return;
     }
 
@@ -21,21 +20,26 @@
         return this.bind("ajaxProgress", f);
     };
 
-
-    // Hold on to a reference to the jqXHR object so that we can pass it to the progress callback
-    $(window).bind("ajaxSend", function(event, jqXHR, ajaxOptions) {
+    // Hold on to a reference to the jqXHR object so that we can pass it to the progress callback.
+    // Namespacing the handler with ".ajaxprogress"
+    $("html").bind("ajaxSend.ajaxprogress", function(event, jqXHR, ajaxOptions) {
         ajaxOptions.__jqXHR = jqXHR;
     });
 
     /**
-     * @param evt XMLHttpRequest progress event
-     * @param options jQuery AJAX options
+     * @param {XMLHttpRequestProgressEvent} evt
+     * @param {Object} options jQuery AJAX options
      */
     function handleOnProgress(evt, options) {
+
+        // Trigger the global event.
+        // function handler(jqEvent, progressEvent, jqXHR) {}
         if (options.global) {
-            $.event.trigger("ajaxProgress", evt, options.__jqXHR);
+            $.event.trigger("ajaxProgress", [evt, options.__jqXHR]);
         }
 
+        // Trigger the local event.
+        // function handler(jqXHR, progressEvent)
         if (typeof options.progress === "function") {
             options.progress(options.__jqXHR, evt);
         }
@@ -56,13 +60,12 @@
 
         var newXhr = makeOriginalXhr();
         if (newXhr) {
-            newXhr.onprogress = function(evt) {
+            newXhr.addEventListener("progress", function(evt) {
                 handleOnProgress(evt, s);
-            }
+            });
         }
         return newXhr;
     };
-
 
     $.ajaxSetup(newOptions);
 

@@ -7,40 +7,43 @@
 
     <script type="text/javascript">
 
-        function runTest() {
+        (function() {
+            "use strict";
+            function runTest() {
 
-            var $prog = $("#prog");
+                var $prog = $("#prog");
 
-            function showProgress(jqXHR, evt) {
-                console.log("Global event", arguments);
-                var msg = "Length not computable";
-                if (evt.lengthComputable) {
-                    msg = "Got " + evt.loaded + " / " + evt.total;
+                function showProgress(jqXHR, evt) {
+                    console.log("Global event", arguments);
+                    var msg = "Length not computable";
+                    if (evt.lengthComputable) {
+                        msg = "Got " + evt.loaded + " / " + evt.total;
+                    }
+                    $("<p>" + msg + "</p>").appendTo($prog);
                 }
-                $("<p>" + msg + "</p>").appendTo($prog);
+
+
+                $("body").ajaxProgress(showProgress);
+
+                // In Firefox, this file is too small
+                var ajax = $.ajax({url:"/lib/jquery-1.5.2.js",
+                            cache: false, dataType: "text", // If we don't set a dataType, jQuery will get reinitialized
+                            progress: function(jqHXR, e) {
+                                console.log("Local event", arguments);
+                            }}
+                );
+
+                ajax.done(function() {
+                    console.log("Done!");
+                });
+
+                ajax.fail(function() {
+                    console.warn(arguments, "Failed!");
+                })
             }
 
-
-            $("body").ajaxProgress(showProgress);
-
-            // In Firefox, this file is too small 
-            var ajax = $.ajax({url:"/lib/jquery-1.5.2.js", cache: false,
-                        progress: function(jqHXR, e) {
-                            console.log("Local event", arguments);
-                        }
-                    }
-            );
-
-            ajax.done(function() {
-                console.log("Done!");
-            });
-
-            ajax.fail(function() {
-                console.warn(arguments, "Failed!");
-            })
-        }
-
-        $(runTest);
+            $(runTest);
+        })();
 
     </script>
 
