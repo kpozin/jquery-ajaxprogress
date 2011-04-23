@@ -23,9 +23,9 @@ You can set a handler on any jQuery selection in the DOM, and it will get trigge
 
     $("#loading").bind("ajaxProgress", function(jqEvent, progressEvent, jqXHR) {
         if (progressEvent.lengthComputable) {
-            $(this).text("Loaded " + (Math.round(progressEvent.loaded / progressEvent.total * 100) / 100)) + "%";
+            $(this).text("Loaded " + (Math.round(progressEvent.loaded / progressEvent.total * 100) / 100)) + "%");
         } else {
-            $(this).text(Loading...)
+            $(this).text(Loading...);
         }
     });
 
@@ -42,9 +42,9 @@ object you pass to `jQuery.ajax()`.
 
     $.ajax("/myfile", {progress: function(jqXHR, progressEvent) {
         if (progressEvent.lengthComputable) {
-            console.log("Loaded " + (Math.round(progressEvent.loaded / progressEvent.total * 100) / 100)) + "%";
+            console.log("Loaded " + (Math.round(progressEvent.loaded / progressEvent.total * 100) / 100)) + "%");
         } else {
-            console.log(Loading...)
+            console.log(Loading...);
         }
     }});
     
