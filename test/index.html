@@ -12,7 +12,7 @@
             var $prog = $("#prog");
 
             function showProgress(jqXHR, evt) {
-                console.log("Global event");
+                console.log("Global event", arguments);
                 var msg = "Length not computable";
                 if (evt.lengthComputable) {
                     msg = "Got " + evt.loaded + " / " + evt.total;
@@ -26,7 +26,7 @@
             // In Firefox, this file is too small 
             var ajax = $.ajax({url:"/lib/jquery-1.5.2.js", cache: false,
                         progress: function(jqHXR, e) {
-                            console.log("Local event", e);
+                            console.log("Local event", arguments);
                         }
                     }
             );

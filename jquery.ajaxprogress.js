@@ -1,5 +1,5 @@
 /*!
- * jQuery ajaxProgress Plugin v1.0.0
+ * jQuery ajaxProgress Plugin v0.0.1
  * http://www.kpozin.net/ajaxprogress
  *
  * (c) 2011, Konstantin Pozin
@@ -23,7 +23,7 @@
 
 
     // Hold on to a reference to the jqXHR object so that we can pass it to the progress callback
-    $(window).bind("ajaxSend.ajaxprogress", function(event, jqXHR, ajaxOptions) {
+    $(window).bind("ajaxSend", function(event, jqXHR, ajaxOptions) {
         ajaxOptions.__jqXHR = jqXHR;
     });
 
@@ -33,7 +33,7 @@
      */
     function handleOnProgress(evt, options) {
         if (options.global) {
-            $.event.trigger("ajaxProgress", evt);
+            $.event.trigger("ajaxProgress", evt, options.__jqXHR);
         }
 
         if (typeof options.progress === "function") {
