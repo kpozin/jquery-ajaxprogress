@@ -10,7 +10,7 @@
 (function($) {
 
     // Test whether onprogress is supported
-    var support = $.support.ajaxProgress = ("onprogress" in (new $.ajaxSettings.xhr()));
+    var support = $.support.ajaxProgress = ("onprogress" in $.ajaxSettings.xhr());
 
     // If it's not supported, we can't do anything
     if (!support) {
