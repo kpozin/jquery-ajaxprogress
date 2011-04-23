@@ -1,5 +1,7 @@
 /*!
- * jQuery ajaxProgress Plugin v0.0.1
+ * jQuery ajaxProgress Plugin v0.5.0
+ * Requires jQuery v1.5.0 or later
+ * 
  * http://www.kpozin.net/ajaxprogress
  *
  * (c) 2011, Konstantin Pozin
@@ -15,6 +17,8 @@
         return;
     }
 
+    var NAMESPACE = ".ajaxprogress";
+
     // Create global "ajaxProgress" event
     $.fn.ajaxProgress = function (f) {
         return this.bind("ajaxProgress", f);
@@ -22,7 +26,7 @@
 
     // Hold on to a reference to the jqXHR object so that we can pass it to the progress callback.
     // Namespacing the handler with ".ajaxprogress"
-    $("html").bind("ajaxSend.ajaxprogress", function(event, jqXHR, ajaxOptions) {
+    $("html").bind("ajaxSend" + NAMESPACE, function(event, jqXHR, ajaxOptions) {
         ajaxOptions.__jqXHR = jqXHR;
     });
 
