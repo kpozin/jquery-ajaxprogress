@@ -42,7 +42,7 @@ $("#loading").bind("ajaxProgress", function(jqEvent, progressEvent, jqXHR) {
     if (progressEvent.lengthComputable) {
         $(this).text("Loaded " + (Math.round(progressEvent.loaded / progressEvent.total * 100)) + "%");
     } else {
-        $(this).text(Loading...);
+        $(this).text("Loading...");
     }
 });
 ```
@@ -61,7 +61,7 @@ $.ajax("/myfile", {progress: function(jqXHR, progressEvent) {
     if (progressEvent.lengthComputable) {
         console.log("Loaded " + (Math.round(progressEvent.loaded / progressEvent.total * 100)) + "%");
     } else {
-        console.log(Loading...);
+        console.log("Loading...");
     }
 }});
 ```
