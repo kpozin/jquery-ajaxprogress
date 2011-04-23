@@ -19,6 +19,7 @@ The plugin exposes the `onprogress` event in two ways:
 
 ### Global AJAX Event
 As a [global AJAX event](http://docs.jquery.com/Ajax_Events#Global_Events) that you can subscribe to.
+
     $("#loading").bind("ajaxProgress", function(jqEvent, progressEvent, jqXHR) {
         if (progressEvent.lengthComputable) {
             $(this).text("Loaded " + (Math.round(progressEvent.loaded / progressEvent.total * 100) / 100)) + "%";
@@ -29,7 +30,7 @@ As a [global AJAX event](http://docs.jquery.com/Ajax_Events#Global_Events) that 
 
 The handler signature is `function ( jqEvent, progressEvent, jqXHR )`, where `jqEvent` is the the event object created by
 jQuery, `progressEvent` is the native object conforming to the
-(ProgressEvent interface)[http://www.w3.org/TR/progress-events/#interface-progressevent], and `jqXHR` is the original
-(wrapper around the XMLHttpRequest object)[http://api.jquery.com/jQuery.ajax/#jqXHR].
+[ProgressEvent interface](http://www.w3.org/TR/progress-events/#interface-progressevent), and `jqXHR` is the original
+[wrapper around the XMLHttpRequest object](http://api.jquery.com/jQuery.ajax/#jqXHR).
 
 ### Local AJAX Event
