@@ -1,7 +1,7 @@
 /*!
  * jQuery ajaxProgress Plugin v0.5.0
  * Requires jQuery v1.5.0 or later
- * 
+ *
  * http://www.kpozin.net/ajaxprogress
  *
  * (c) 2011, Konstantin Pozin
@@ -51,7 +51,7 @@
 
 
     // We'll work with the original factory method just in case
-    var makeOriginalXhr = $.ajaxSettings.xhr.bind($.ajaxSettings);
+    var makeOriginalXhr = $.proxy($.ajaxSettings.xhr, $.ajaxSettings);
 
     // Options to be passed into $.ajaxSetup;
     var newOptions = {};
