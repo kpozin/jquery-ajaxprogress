@@ -66,7 +66,7 @@
         if (newXhr) {
             newXhr.addEventListener("progress", function(evt) {
                 handleOnProgress(evt, s);
-            });
+            }, false);
         }
         return newXhr;
     };
