@@ -47,7 +47,7 @@ $("#loading").bind("ajaxProgress", function(jqEvent, progressEvent, jqXHR) {
 });
 ```
 
-The handler signature is `function ( jqEvent, progressEvent, jqXHR )`, where `jqEvent` is the the event object created by
+The handler signature is `function ( jqEvent, progressEvent, jqXHR )`, where `jqEvent` is the event object created by
 jQuery, `progressEvent` is the native ProgressEvent object described above, and `jqXHR` is the original
 [wrapper around the XMLHttpRequest object](http://api.jquery.com/jQuery.ajax/#jqXHR).
 
